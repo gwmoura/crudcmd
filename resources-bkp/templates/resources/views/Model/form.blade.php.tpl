@@ -1,8 +1,9 @@
 {!! Form::model($model, ['route' => $route, 'method' => $method]) !!}
-    @foreach($model['attributes'] as $attribute)
+
+    @foreach($model->fields as $attribute => $value)
         <p>
-            {{ Form::label($attribute) }}
-            {{ Form::text($model->getTable().'['.$attribute.']', $model->$attribute) }}
+            {{ Form::label($value['label']) }}
+            {{ call_user_func('Form::'.$value['type'], $model->getTable().'['.$attribute.']', $model->$attribute) }}
         </p>
     @endforeach
     <p>
