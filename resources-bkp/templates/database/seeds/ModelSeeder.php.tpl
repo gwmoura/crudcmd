@@ -13,7 +13,7 @@ class [Model]Seeder extends Seeder
     {
         if(\App\Models\[Model]::count() == 0){
             $[Model] = [
-                ['descricao' => 'Exemplo', 'ativo' => 's']
+                //['descricao' => 'Exemplo', 'ativo' => 's']
             ];
 
             foreach($[Model] as $value){
