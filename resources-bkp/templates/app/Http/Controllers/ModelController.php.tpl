@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Semge\Laravel\BaseControllerTrait;
-use App\Http\Requests\CasaRequest;
+use App\Http\Requests\[Model]Request;
 
 class [Model]Controller extends Controller
 {
@@ -24,10 +24,18 @@ class [Model]Controller extends Controller
 
     	return Datatables::of($[Model])
         ->addColumn('acoes', function($[Model]) {
-            return '<a href="'.route('[tablename].edit', [$[Model]->id]).'" class="btn btn-default">Editar</a>
-            <a href="'.route('[tablename].update', [$[Model]->id]).'" class="btn btn-default">
-            (($[Model]->ativo == 's') ? 'Desativar' :'Ativar')
-            </a>';
+            return '<a  style="float:left"  href="'.route('[tablename].edit', [$[Model]->id]).'" class="btn btn-default">Editar</a>
+            
+                <form style="float:left" method="POST"
+                    action="/[tablename]/'. $[Model]->id .'"
+                    data-message="Delete this Thing?" >'. csrf_field() .'
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="[tablename][ativo]" value="'.(($[Model]->ativo) ? false : true).'">
+                    <input type="submit" class="btn btn-default" value="'.(($[Model]->ativo) ? "Desativar" : "Ativar").'" >
+                </form>';
+        })
+        ->editColumn('ativo', function($[Model]) {
+            return (($[Model]->ativo) ? "Ativo" : "Inativo");
         })
         ->removeColumn('id')
         ->make(true);
