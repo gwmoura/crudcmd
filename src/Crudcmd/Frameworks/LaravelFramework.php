@@ -22,6 +22,7 @@ class LaravelFramework implements FrameworkInterface
             'app/Http/Controllers/'.$controller.'.php.tpl',
             'app/Repositories/'.$repository.'.php.tpl',
             'database/factories/'.$factory.'.php.tpl',
+            'database/seeds/'.$seed.'.php.tpl',
         ];
         $path = 'resources/views/Model';
         $templates = array_merge($templates, $this->getViewFiles($path));
@@ -36,7 +37,8 @@ class LaravelFramework implements FrameworkInterface
             'repository' => $model.'Repository',
             'factory' => $model.'Factory',
             'view' => strtolower($model),
-            'migration' => strtolower($model)
+            'migration' => strtolower($model),
+            'seed' => $model.'Seeder'
         ];
     }
 
@@ -49,6 +51,7 @@ class LaravelFramework implements FrameworkInterface
         $files[] = $this->getRepositoryFileName($repository);
         $files[] = $this->getFactoryFileName($factory);
         $files[] = $this->getMigrationFileName($migration);
+        $files[] = $this->getSeedsFileName($seed);
         $files = array_merge($files, $this->getViewsFileName($view));
         return $files;
     }
@@ -99,6 +102,13 @@ class LaravelFramework implements FrameworkInterface
         $file = getcwd().'/database/migrations/Y_m_d_his_create_'.$migration.'_table.php';
         return $file;
     }
+
+    public function getSeedsFileName($seed)
+    {
+        $file = getcwd().'/database/seeds/'.$seed.'.php';
+        return $file;
+    }
+
 
     public function __toString()
     {

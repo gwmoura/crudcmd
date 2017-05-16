@@ -13,6 +13,7 @@ interface FrameworkInterface
     public function getFactoryFileName($factory);
     public function getViewsFileName($view);
     public function getMigrationFileName($migration);
+    public function getSeedsFileName($seed);
     public function getTemplatesPath();
     public function __toString();
 }
