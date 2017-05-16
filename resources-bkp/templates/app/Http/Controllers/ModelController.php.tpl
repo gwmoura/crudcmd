@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Redirect;
 use Semge\Laravel\BaseControllerTrait;
 use App\Http\Requests\[Model]Request;
 
+use Datatables;
+
 class [Model]Controller extends Controller
 {
     use BaseControllerTrait;
@@ -30,7 +32,7 @@ class [Model]Controller extends Controller
                     action="/[tablename]/'. $[Model]->id .'"
                     data-message="Delete this Thing?" >'. csrf_field() .'
                     <input type="hidden" name="_method" value="PUT">
-                    <input type="hidden" name="[tablename][ativo]" value="'.(($[Model]->ativo) ? false : true).'">
+                    <input type="hidden" name="[tablename][ativo]" value="'.(($[Model]->ativo) ? 0 : 1).'">
                     <input type="submit" class="btn btn-default" value="'.(($[Model]->ativo) ? "Desativar" : "Ativar").'" >
                 </form>';
         })
