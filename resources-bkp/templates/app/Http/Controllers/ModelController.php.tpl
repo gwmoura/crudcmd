@@ -22,7 +22,7 @@ class [Model]Controller extends Controller
     */
     public function anyData()
     {
-    	$[Model] = $repositoryClass->getDataForDataTable();
+    	$[Model] = $this->repository->getDataForDataTable();
 
     	return Datatables::of($[Model])
         ->addColumn('acoes', function($[Model]) {
@@ -39,6 +39,7 @@ class [Model]Controller extends Controller
         ->editColumn('ativo', function($[Model]) {
             return (($[Model]->ativo) ? "Ativo" : "Inativo");
         })
+        ->rawColumns(['acoes'])
         ->removeColumn('id')
         ->make(true);
     }

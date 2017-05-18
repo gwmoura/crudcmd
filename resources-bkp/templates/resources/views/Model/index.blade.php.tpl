@@ -8,11 +8,12 @@
 
 
     <div class="container">
-        <table class="table table-bordered table-striped" id="{{[tablename]}}-table">
+        <table class="table table-bordered table-striped" id="[tablename]-table">
             <thead>
                 <tr>
                     <th>Descrição</th>
-                    <div class="col-md-2"><th>Ações</th></div>
+                    <th>Status</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
         </table>
@@ -22,7 +23,7 @@
 @section('js')
 <script>
 
-    $('#{{[tablename]}}-table').DataTable({
+    $('#[tablename]-table').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
         },
@@ -31,6 +32,7 @@
         ajax: '{!! route('[tablename].data') !!}',
         columns: [
             { data: 'descricao', name: 'descricao' },
+            { data: 'ativo', name: 'ativo'},
             { data: 'acoes', name: 'acoes', orderable: false, searchable: false},
         ]
     });
