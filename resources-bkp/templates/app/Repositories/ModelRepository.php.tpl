@@ -12,7 +12,8 @@ class [Model]Repository extends Repository
         $[Model] = $this->newQuery()
             ->select(
             	'id',
-                'descricao'
+                'descricao',
+                'ativo'
             );
         return $[Model];
     }
